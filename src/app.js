@@ -1,59 +1,67 @@
 const PLAYERS = [
-    "Spiderman",
-    "Captain America",
-    "Wonderwoman",
-    "Popcorn",
-    "Gemwoman",
-    "Bolt",
-    "Antwoman",
-    "Mask",
-    "Tiger",
-    "Captain",
-    "Catwoman",
-    "Fish",
-    "Hulk",
-    "Ninja",
-    "Black Cat",
-    "Volverine",
-    "Thor",
-    "Slayer",
-    "Vader",
-    "Slingo"
+  "Spiderman",
+  "Captain America",
+  "Wonderwoman",
+  "Popcorn",
+  "Gemwoman",
+  "Bolt",
+  "Antwoman",
+  "Mask",
+  "Tiger",
+  "Captain",
+  "Catwoman",
+  "Fish",
+  "Hulk",
+  "Ninja",
+  "Black Cat",
+  "Volverine",
+  "Thor",
+  "Slayer",
+  "Vader",
+  "Slingo",
 ];
 
-// initialize players with image and strength
 const initPlayers = (players) => {
-    let detailedPlayers = '';
+  let detailedPlayers = [];
+  for (var i = 0; i < players.length; i++) {
+    detailedPlayers[i] = {
+      name: players[i],
+      image: "images/super-" + (i + 1) + ".png",
+      strength: getRandomStrength(),
+      type: i % 2 == 0 ? "hero" : "villain",
+    };
+  }
+  return detailedPlayers;
+};
 
-    // Instead of forloop use Map method
-    // Code here
-
-    return detailedPlayers;
-}
-
-// getting random strength
 const getRandomStrength = () => {
-    return Math.ceil(Math.random() * 100);
-}
+  var strength = Math.floor(Math.random() * 100);
+  return strength;
+};
 
-// Build player template
 const buildPlayers = (players, type) => {
-    let fragment = '';
+  let fragment = "";
 
-    // Instead of using for loop
-    // Use chaining of Array methods - filter, map and join
-    // Type your code here
+  // Type your code here
+  for (var i = 0; i < players.length; i++) {
+    fragment += `<div class="player">
+        <img src="${players[i].image}" alt = " ">
+        <div class="name">${players[i].name}</div>
+        <div class="strength">${players[i].strength}</div>
+    </div>`;
+  }
 
-    return fragment;
-}
+  return fragment;
+};
 
-// Display players in HTML
 const viewPlayers = (players) => {
-    document.getElementById('heroes').innerHTML = buildPlayers(players, 'hero');
-    document.getElementById('villains').innerHTML = buildPlayers(players, 'villain');
-}
-
+  document.getElementById("heroes").innerHTML = buildPlayers(players, "hero");
+  document.getElementById("villains").innerHTML = buildPlayers(
+    players,
+    "villain"
+  );
+};
 
 window.onload = () => {
-    viewPlayers(initPlayers(PLAYERS));
-}
+  viewPlayers(initPlayers(PLAYERS));
+};
